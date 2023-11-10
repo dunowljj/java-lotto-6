@@ -16,19 +16,19 @@ public class LottoController {
         showIssuedLottos(issuedLottos);
         lineBreak();
 
-        Lotto winningLotto = getWinningLotto();
+        Lotto OriginWinningLotto = getWinningLotto();
         lineBreak();
 
-        LottoNumber bonusLottoNumber = getBonusLottoNumber(winningLotto);
+        WinningLotto winningLotto = getBonusLottoNumber(OriginWinningLotto);
         lineBreak();
 
-        WinnerStatistics winnerStatistic = getWinnerStatistic(issuedLottos, winningLotto, bonusLottoNumber);
+        WinnerStatistics winnerStatistic = getWinnerStatistic(issuedLottos, winningLotto);
         announceWinningStatistics(winnerStatistic);
         printObject(EarningRate.of(purchaseBudget, winnerStatistic));
     }
 
-    private WinnerStatistics getWinnerStatistic(Lottos issuedLottos, Lotto winningLotto, LottoNumber bonusLottoNumber) {
-        MatchingResults matchingResults = issuedLottos.matchAll(winningLotto, bonusLottoNumber);
+    private WinnerStatistics getWinnerStatistic(Lottos issuedLottos, WinningLotto winningLotto) {
+        MatchingResults matchingResults = issuedLottos.matchAll(winningLotto);
         return WinnerStatistics.collect(matchingResults);
     }
 }

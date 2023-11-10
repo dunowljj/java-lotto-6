@@ -10,9 +10,9 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public MatchingResults matchAll(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+    public MatchingResults matchAll(WinningLotto winningLotto) {
         List<MatchingResult> matchingResults = lottos.stream()
-                .map((issuedLotto -> issuedLotto.match(winningLotto, bonusLottoNumber)))
+                .map((issuedLotto -> issuedLotto.match(winningLotto)))
                 .toList();
 
         return new MatchingResults(matchingResults);

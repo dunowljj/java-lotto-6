@@ -63,35 +63,4 @@ public class InputValidationUtilsTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(INVALID_DELIMITER_POSITION.getMessage());
     }
-
-
-    @DisplayName("보너스 넘버 중복 예외 : winningLotto에 번호와 중복되는 번호가 존재하면 IllegalArgumentException을 발생")
-    @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
-    public void validateDuplication_exception(int duplicatedNumber) {
-        //given
-        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumber lottoNumber = new LottoNumber(duplicatedNumber);
-
-        // when, then
-        assertThatThrownBy(() ->
-                InputValidationUtils.validateDuplication(winningLotto, lottoNumber)
-        )
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(DUPLICATED_BONUS_NUMBER_EXIST.getMessage());
-    }
-
-    @DisplayName("보너스 넘버 중복 없음 : 예외 발생 안함")
-    @ParameterizedTest
-    @ValueSource(ints = {7, 8, 9, 40, 43, 45})
-    public void validateDuplication_noError(int duplicatedNumber) {
-        //given
-        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumber lottoNumber = new LottoNumber(duplicatedNumber);
-
-        // when, then
-        assertThatNoException().isThrownBy(() ->
-                InputValidationUtils.validateDuplication(winningLotto, lottoNumber)
-        );
-    }
 }

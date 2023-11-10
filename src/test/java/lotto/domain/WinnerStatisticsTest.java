@@ -1,24 +1,25 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class WinnerStatisticsTest {
 
     private Lottos issuedLottos;
 
-    private Lotto winningLotto;
+    private Lotto originWinningLotto;
 
-    private int bonusNumber;
+    private LottoNumber bonusNumber;
 
     @BeforeEach
     public void setUp() {
-        bonusNumber = 7;
-        winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        bonusNumber = new LottoNumber(7);
+        originWinningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         issuedLottos = new Lottos(
                 List.of(
                         new Lotto(List.of(1, 2, 3, 4, 5, 6)), // 1등 6
@@ -36,11 +37,12 @@ public class WinnerStatisticsTest {
     @Test
     public void collectAndToString() throws Exception {
         //when
-        MatchingResults matchingResults = issuedLottos.matchAll(winningLotto, new LottoNumber(bonusNumber));
+        WinningLotto winningLotto = new WinningLotto(originWinningLotto, bonusNumber);
+        MatchingResults matchingResults = issuedLottos.matchAll(winningLotto);
         WinnerStatistics winnerStatistics = WinnerStatistics.collect(matchingResults);
 
         //then
-        Assertions.assertThat(winnerStatistics.toString()).isEqualTo(
+        assertThat(winnerStatistics.toString()).isEqualTo(
                 "3개 일치 (5,000원) - 1개\n" +
                         "4개 일치 (50,000원) - 1개\n" +
                         "5개 일치 (1,500,000원) - 1개\n" +

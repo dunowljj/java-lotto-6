@@ -1,8 +1,6 @@
 package lotto.util;
 
 import camp.nextstep.edu.missionutils.Console;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 
 import java.util.List;
 
@@ -21,12 +19,6 @@ public class InputUtils {
         String input = Console.readLine();
         validateHasInput(input);
         return input;
-    }
-
-    public static LottoNumber readBonusNumber(Lotto winningLotto) {
-        LottoNumber lottoNumber = new LottoNumber(readInt());
-        validateDuplication(winningLotto, lottoNumber);
-        return lottoNumber;
     }
 
     public static int readInt() {

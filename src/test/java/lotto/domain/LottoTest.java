@@ -61,13 +61,13 @@ class LottoTest {
 
     public static Stream<Arguments> lottoNumbers_bonusNumber_Counts() {
         return Stream.of(
-                Arguments.arguments(List.of(1, 2, 3, 4, 5, 6), 7, 6),  //1
-                Arguments.arguments(List.of(2, 3, 4, 5, 6, 7), 7, 5),  //2
-                Arguments.arguments(List.of(2, 3, 4, 5, 6, 8), 7, 5), // 3
-                Arguments.arguments(List.of(4, 5, 6, 7, 8, 9), 7, 3),
-                Arguments.arguments(List.of(5, 6, 7, 8, 9, 10), 7, 2),
-                Arguments.arguments(List.of(6, 7, 8, 9, 10, 11), 7, 1),
-                Arguments.arguments(List.of(7, 8, 9, 10, 11, 12), 7, 0)
+                Arguments.arguments(List.of(1, 2, 3, 4, 5, 6), 7, 6, false),  //1
+                Arguments.arguments(List.of(2, 3, 4, 5, 6, 7), 1, 5, true),  //2
+                Arguments.arguments(List.of(2, 3, 4, 5, 6, 8), 40, 5, false), // 3
+                Arguments.arguments(List.of(4, 5, 6, 7, 8, 9), 3, 3, true),
+                Arguments.arguments(List.of(5, 6, 7, 8, 9, 10), 4, 2, true),
+                Arguments.arguments(List.of(6, 7, 8, 9, 10, 11), 5, 1, true),
+                Arguments.arguments(List.of(7, 8, 9, 10, 11, 12), 6, 0, true)
         );
     }
 
@@ -78,11 +78,11 @@ class LottoTest {
         //given
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
 
-        Lotto winningLotto = new Lotto(winningNumbers);
         Lotto lotto = new Lotto(numbers);
+        Lotto answer = new Lotto(winningNumbers);
 
         //when
-        int matchResult = lotto.match(winningLotto);
+        int matchResult = lotto.match(answer);
 
         //then
         assertThat(matchResult).isEqualTo(count);
@@ -96,14 +96,14 @@ class LottoTest {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
 
         Lotto lotto = new Lotto(numbers);
-        Lotto winningLotto = new Lotto(winningNumbers);
-        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
 
+        Lotto originWinningLotto = new Lotto(winningNumbers);
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(originWinningLotto, bonusLottoNumber);
         //when
-        MatchingResult result = lotto.match(winningLotto, bonusLottoNumber);
+        MatchingResult result = lotto.match(winningLotto);
 
         //then
         assertThat(result.getCorrectCount()).isEqualTo(count);
-        assertThat(result.isBonusCorrect()).isFalse();
     }
 }

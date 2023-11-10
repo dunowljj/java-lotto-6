@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.PurchaseBudget;
+import lotto.domain.WinningLotto;
 
 import static lotto.constants.message.InputMessage.*;
 import static lotto.util.InputUtils.*;
@@ -29,13 +30,13 @@ public class InputView {
         }
     }
 
-    public static LottoNumber getBonusLottoNumber(Lotto winningLotto) {
+    public static WinningLotto getBonusLottoNumber(Lotto answerLotto) {
         try {
             println(DEMAND_INPUT_BONUS_NUMBER.getMessage());
-            return readBonusNumber(winningLotto);
+            return new WinningLotto(answerLotto, new LottoNumber(readInt()));
         } catch (IllegalArgumentException e) {
             println(e.getMessage());
-            return getBonusLottoNumber(winningLotto);
+            return getBonusLottoNumber(answerLotto);
         }
     }
 

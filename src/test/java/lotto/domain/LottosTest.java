@@ -14,14 +14,14 @@ public class LottosTest {
 
     private Lottos issuedLottos;
 
-    private Lotto winningLotto;
+    private Lotto originalWinnigLotto;
 
     private int bonusNumber;
 
     @BeforeEach
     public void setUp() {
         bonusNumber = 7;
-        winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        originalWinnigLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         issuedLottos = new Lottos(
                 List.of(
                         new Lotto(List.of(1, 2, 3, 4, 5, 6)), // 1등 6
@@ -39,7 +39,11 @@ public class LottosTest {
     @Test
     public void matchAll() throws Exception {
         //when
-        MatchingResults matchingResults = issuedLottos.matchAll(winningLotto, new LottoNumber(bonusNumber));
+
+        LottoNumber bonusNumber = new LottoNumber(this.bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(originalWinnigLotto, bonusNumber);
+
+        MatchingResults matchingResults = issuedLottos.matchAll(winningLotto);
 
         //then
         List<LottoRank> lottoRanks = matchingResults.getLottoRanks();

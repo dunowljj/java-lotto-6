@@ -31,16 +31,16 @@ public class Lotto {
         return new HashSet<>(numbers).size() != LOTTO_SIZE.getValue();
     }
 
-    public MatchingResult match(Lotto winningLotto, LottoNumber bonusNumber) {
-        int count = match(winningLotto);
-        boolean isBonusCorrect = numbers.contains(bonusNumber);
+    public MatchingResult match(WinningLotto winningLotto) {
+        int count = winningLotto.countCorrectNumbers(this);
+        boolean isBonusCorrect = winningLotto.checkBonusNumber(numbers);
 
         return new MatchingResult(count, isBonusCorrect);
     }
 
-    protected int match(Lotto winningLotto) {
+    protected int match(Lotto lotto) {
         return (int) this.numbers.stream()
-                .filter((number) -> winningLotto.contains(number))
+                .filter((number) -> lotto.contains(number))
                 .count();
     }
 

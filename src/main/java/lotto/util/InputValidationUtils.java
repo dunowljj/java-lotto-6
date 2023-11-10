@@ -1,8 +1,5 @@
 package lotto.util;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-
 import static lotto.constants.Constants.Strings.LOTTO_NUMBERS_INPUT_DELIMITER;
 import static lotto.constants.message.ErrorMessage.*;
 
@@ -27,10 +24,5 @@ public class InputValidationUtils {
             throw new IllegalArgumentException(INVALID_DELIMITER_POSITION.getMessage());
         }
     }
-
-    public static void validateDuplication(Lotto winningLotto, LottoNumber lottoNumber) {
-        if (winningLotto.contains(lottoNumber)) {
-            throw new IllegalArgumentException(DUPLICATED_BONUS_NUMBER_EXIST.getMessage());
-        }
-    }
 }
+
