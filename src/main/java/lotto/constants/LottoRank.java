@@ -18,6 +18,7 @@ public enum LottoRank {
     private final int correctCount;
 
     private final boolean isBonusCorrect;
+
     private final int prizeMoney;
 
     LottoRank(int rank, int correctCount, boolean isBonusCorrect, int prizeMoney) {

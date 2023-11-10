@@ -15,7 +15,7 @@ public class LottoGeneratorTest {
     @RepeatedTest(30)
     public void generateLotto_repeat30_inRange() throws Exception {
         //given
-        List<Integer> numbers = LottoGenerator.generateLottoNumbers();
+        List<Integer> numbers = LottoGenerator.generateLottoNumbers(new RandomLottoGenerateStrategy());
 
         //when, then
         assertThat(numbers).allMatch((number) ->

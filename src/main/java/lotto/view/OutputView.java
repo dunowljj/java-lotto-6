@@ -5,6 +5,7 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseQuantity;
 import lotto.domain.WinnerStatistics;
+import lotto.util.RandomLottoGenerateStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class OutputView {
 
     public static Lottos getIssuedLottos(PurchaseQuantity quantity) {
         List<Lotto> lottos = new ArrayList<>();
-        quantity.forEach((repeat) -> lottos.add(new Lotto(generateLottoNumbers())));
+        quantity.forEach((repeat) -> lottos.add(new Lotto(generateLottoNumbers(new RandomLottoGenerateStrategy()))));
         return new Lottos(lottos);
     }
 

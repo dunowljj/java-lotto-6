@@ -16,10 +16,10 @@ public class LottoController {
         showIssuedLottos(issuedLottos);
         lineBreak();
 
-        Lotto OriginWinningLotto = getWinningLotto();
+        Lotto OriginalWinningLotto = getWinningLotto();
         lineBreak();
 
-        WinningLotto winningLotto = getBonusLottoNumber(OriginWinningLotto);
+        WinningLotto winningLotto = getBonusLottoNumber(OriginalWinningLotto);
         lineBreak();
 
         WinnerStatistics winnerStatistic = getWinnerStatistic(issuedLottos, winningLotto);
