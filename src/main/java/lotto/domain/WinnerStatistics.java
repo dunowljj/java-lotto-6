@@ -11,27 +11,29 @@ public class WinnerStatistics {
     private final RankCounts rankCounts;
     private final TotalPrizeAmount totalPrizeAmount;
 
-    public WinnerStatistics() {
-        rankCounts = new RankCounts();
-        totalPrizeAmount = new TotalPrizeAmount();
-    }
-
     public WinnerStatistics(RankCounts rankCounts, TotalPrizeAmount totalPrizeAmount) {
         this.rankCounts = rankCounts;
         this.totalPrizeAmount = totalPrizeAmount;
     }
 
-    public WinnerStatistics collect(MatchingResults matchingResults) {
-        matchingResults.getLottoRanks()
-                .stream()
-                .forEach(this::update);
+    public static WinnerStatistics collect(MatchingResults matchingResults) {
+        RankCounts rankCounts = new RankCounts();
+        TotalPrizeAmount totalPrizeAmount = new TotalPrizeAmount();
+
+        collect(matchingResults, rankCounts, totalPrizeAmount);
 
         return new WinnerStatistics(rankCounts, totalPrizeAmount);
     }
 
-    private void update(LottoRank lottoRank) {
-        rankCounts.update(lottoRank);
-        totalPrizeAmount.update(lottoRank.getPrizeMoney());
+    private static void collect(MatchingResults matchingResults, RankCounts rankCounts, TotalPrizeAmount totalPrizeAmount) {
+        matchingResults.getLottoRanks()
+                .stream()
+                .forEach(lottoRank -> collect(lottoRank, rankCounts, totalPrizeAmount));
+    }
+
+    private static void collect(LottoRank lottoRank, RankCounts rankCounts, TotalPrizeAmount totalPrizeAmount) {
+        rankCounts.addCount(lottoRank);
+        totalPrizeAmount.addPrizeMoney(lottoRank.getPrizeMoney());
     }
 
     @Override

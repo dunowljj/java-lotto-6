@@ -29,8 +29,6 @@ public class LottoController {
 
     private WinnerStatistics getWinnerStatistic(Lottos issuedLottos, Lotto winningLotto, LottoNumber bonusLottoNumber) {
         MatchingResults matchingResults = issuedLottos.matchAll(winningLotto, bonusLottoNumber);
-
-        WinnerStatistics winnerStatistics = new WinnerStatistics();
-        return winnerStatistics.collect(matchingResults);
+        return WinnerStatistics.collect(matchingResults);
     }
 }

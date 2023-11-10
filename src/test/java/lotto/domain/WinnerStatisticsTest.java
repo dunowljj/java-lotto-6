@@ -35,12 +35,9 @@ public class WinnerStatisticsTest {
     @DisplayName("당첨자 통계를 집계한 후, toString 값 검증")
     @Test
     public void collectAndToString() throws Exception {
-        //given
-        WinnerStatistics winnerStatistics = new WinnerStatistics();
-
         //when
         MatchingResults matchingResults = issuedLottos.matchAll(winningLotto, new LottoNumber(bonusNumber));
-        winnerStatistics.collect(matchingResults);
+        WinnerStatistics winnerStatistics = WinnerStatistics.collect(matchingResults);
 
         //then
         Assertions.assertThat(winnerStatistics.toString()).isEqualTo(

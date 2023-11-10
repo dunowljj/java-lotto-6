@@ -16,7 +16,7 @@ public class RankCounts {
         this.rankCounts = new HashMap<>();
     }
 
-    public void update(LottoRank lottoRank) {
+    public void addCount(LottoRank lottoRank) {
         int nowCount = rankCounts.getOrDefault(lottoRank, INTEGER_ZERO.getValue());
         rankCounts.put(lottoRank, nowCount + RANK_COUNT_INCREASE.getValue());
     }

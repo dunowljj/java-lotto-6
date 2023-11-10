@@ -14,7 +14,7 @@ public class TotalPrizeAmount {
         this.totalPrizeAmount = totalPrizeAmount;
     }
 
-    public void update(long prizeMoney) {
+    public void addPrizeMoney(long prizeMoney) {
         totalPrizeAmount += prizeMoney;
     }
 
