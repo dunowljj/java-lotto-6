@@ -21,13 +21,12 @@ public enum ErrorMessage implements Message {
     private static final String SUFFIX = " 다시 입력해 주세요.";
 
     private final String message;
-
-    ErrorMessage(String message) {
-        this.message = message;
+    ErrorMessage(final String message) {
+        this.message = PREFIX + message + SUFFIX;
     }
 
     @Override
     public String getMessage() {
-        return PREFIX + this.message + SUFFIX;
+        return this.message;
     }
 }
